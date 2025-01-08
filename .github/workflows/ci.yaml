@@ -1,11 +1,15 @@
+#CICD using Github Actions
+
 name: CI
 
+#Exclude the workflow to run on changes to the helm chart
 on:
   push:
     branches:
       - main
     paths-ignore:
       - 'helm/**'
+      - 'k8s/**'
       - 'README.md'
 
 jobs:
@@ -30,10 +34,10 @@ jobs:
 
   code-quality:
     runs-on: ubuntu-latest
-
+  
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Run golangci-lint
       uses: golangci/golangci-lint-action@v6 
